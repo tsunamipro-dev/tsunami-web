@@ -405,7 +405,7 @@
         email: formData.get('email'),
         telefono: formData.get('telefono'),
         mensaje: formData.get('mensaje'),
-        fuente: 'Landing Tsunami' // Para que sepas de dónde viene
+        fuente: 'landing' // Para que sepas de dónde viene
       };
 
       try {
