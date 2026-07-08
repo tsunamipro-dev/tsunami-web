@@ -380,23 +380,57 @@
     $$("[data-wa]").forEach(function (a) { a.setAttribute("href", href); a.setAttribute("target", "_blank"); });
   }
 
-  /* ---- Formulario: validación + envío simulado + fallback WhatsApp ---- */
-  /* NOTA: estático = no hay backend. Para producción conectar Formspree/Web3Forms
-     o dejar solo el CTA de WhatsApp. Hoy: simula éxito y ofrece WhatsApp. */
+  /* ---- Formulario: validación + envío a Supabase ---- */
   function initForm() {
     var form = $("[data-form]");
     if (!form) return;
     var msg = $("[data-form-msg]", form);
-    form.addEventListener("submit", function (e) {
+
+    // INICIALIZA SUPABASE (Reemplaza con tus llaves reales)
+    const supabaseUrl = 'https://zbstktplvojipfsiuqca.supabase.co'; 
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpic3RrdHBsdm9qaXBmc2l1cWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyMTY2NTAsImV4cCI6MjA5ODc5MjY1MH0.NvGOyGGuYY2UMenrKuUHLZye5ZXPm6piCeKEDTKRghI';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
+      
       var btn = $('button[type="submit"]', form);
       if (btn) { btn.disabled = true; btn.textContent = "Enviando…"; }
-      setTimeout(function () {
+      
+      // Obtener los datos del formulario
+      const formData = new FormData(form);
+      const leadData = {
+        nombre: formData.get('nombre'),
+        email: formData.get('email'),
+        telefono: formData.get('telefono'),
+        mensaje: formData.get('mensaje'),
+        fuente: 'Landing Tsunami' // Para que sepas de dónde viene
+      };
+
+      try {
+        // Enviar a Supabase
+        const { error } = await supabase
+          .from('leads')
+          .insert([leadData]);
+
+        if (error) throw error;
+
+        // Éxito
         form.reset();
+        if (msg) { 
+          msg.textContent = "¡Listo! Te contactaremos pronto."; 
+          msg.classList.add("is-ok"); 
+        }
+      } catch (error) {
+        console.error("Error al guardar el lead:", error);
+        if (msg) { 
+          msg.textContent = "Hubo un error al enviar tu idea. Por favor, contáctanos por WhatsApp."; 
+          msg.classList.remove("is-ok"); 
+        }
+      } finally {
         if (btn) { btn.disabled = false; btn.textContent = "Suéltala"; }
-        if (msg) { msg.textContent = "¡Listo! Te contactaremos pronto. (Demo: aún falta conectar el envío real.)"; msg.classList.add("is-ok"); }
-      }, 700);
+      }
     });
   }
 

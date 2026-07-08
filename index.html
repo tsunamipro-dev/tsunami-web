@@ -381,28 +381,26 @@
           <a class="wa-link" href="mailto:info.tsunami.mx@gmail.com">o por correo: info.tsunami.mx@gmail.com</a>
         </div>
 
-        <form class="contact-form reveal" data-form novalidate>
-          <div class="field">
-            <label for="f-nombre">Nombre</label>
-            <input id="f-nombre" name="nombre" type="text" required autocomplete="name" />
-          </div>
-          <div class="field">
-            <label for="f-tipo">Tipo de proyecto</label>
-            <select id="f-tipo" name="tipo">
-              <option value="">Elige una opción</option>
-              <option>Sencillo / canción</option>
-              <option>EP</option>
-              <option>Álbum</option>
-              <option>Todavía no sé</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-idea">Tu idea</label>
-            <textarea id="f-idea" name="idea" rows="4" placeholder="Cuéntanos qué tienes en la cabeza…" required></textarea>
-          </div>
-          <button class="btn btn-primary" type="submit">Suéltala</button>
-          <p class="form-msg" data-form-msg role="status" aria-live="polite"></p>
-        </form>
+<form class="contact-form reveal" data-form novalidate>
+  <div class="field">
+    <label for="f-nombre">Nombre</label>
+    <input id="f-nombre" name="nombre" type="text" required autocomplete="name" />
+  </div>
+  <div class="field">
+    <label for="f-email">Correo electrónico</label>
+    <input id="f-email" name="email" type="email" required autocomplete="email" />
+  </div>
+  <div class="field">
+    <label for="f-telefono">Teléfono (opcional)</label>
+    <input id="f-telefono" name="telefono" type="tel" autocomplete="tel" />
+  </div>
+  <div class="field">
+    <label for="f-idea">Tu idea</label>
+    <textarea id="f-idea" name="mensaje" rows="4" placeholder="Cuéntanos qué tienes en la cabeza…" required></textarea>
+  </div>
+  <button class="btn btn-primary" type="submit">Suéltala</button>
+  <p class="form-msg" data-form-msg role="status" aria-live="polite"></p>
+</form>
       </div>
     </section>
   </main>
@@ -426,6 +424,9 @@
   <script defer src="lib/waves-gl.js?v=20260701"></script>
   <script defer src="lib/manifest.js?v=20260707a"></script>
   <script defer src="main.js?v=20260707a"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="lib/gsap.min.js"></script>
+  <!-- ... el resto de tus scripts ... -->
 </body>
 </html>
 
