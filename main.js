@@ -380,56 +380,46 @@
     $$("[data-wa]").forEach(function (a) { a.setAttribute("href", href); a.setAttribute("target", "_blank"); });
   }
 
-  /* ---- Formulario: validación + envío a Supabase ---- */
+  /* ---- Formulario: validación + envío a Supabase ----
+     La inserción vive en lib/lead-insert.js (helper compartido con
+     estudio.html). Aquí solo orquestamos UI + tipo_solicitud. El form
+     puede declarar su intención con data-tipo-solicitud; default a
+     'idea_completa' (esta es la landing del cliente-idea). */
   function initForm() {
     var form = $("[data-form]");
     if (!form) return;
     var msg = $("[data-form-msg]", form);
-
-    // INICIALIZA SUPABASE (Reemplaza con tus llaves reales)
-    const supabaseUrl = 'https://zbstktplvojipfsiuqca.supabase.co'; 
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpic3RrdHBsdm9qaXBmc2l1cWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMyMTY2NTAsImV4cCI6MjA5ODc5MjY1MH0.NvGOyGGuYY2UMenrKuUHLZye5ZXPm6piCeKEDTKRghI';
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+    var tipo = form.getAttribute("data-tipo-solicitud") || "idea_completa";
+    var btnLabel = null;
 
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
       if (!form.reportValidity()) return;
-      
+
       var btn = $('button[type="submit"]', form);
-      if (btn) { btn.disabled = true; btn.textContent = "Enviando…"; }
-      
-      // Obtener los datos del formulario
-      const formData = new FormData(form);
-      const leadData = {
-        nombre: formData.get('nombre'),
-        email: formData.get('email'),
-        telefono: formData.get('telefono'),
-        mensaje: formData.get('mensaje'),
-        fuente: 'landing' // Para que sepas de dónde viene
+      if (btn) { btnLabel = btnLabel || btn.textContent; btn.disabled = true; btn.textContent = "Enviando…"; }
+
+      var fd = new FormData(form);
+      var lead = {
+        nombre: fd.get("nombre"),
+        email: fd.get("email"),
+        telefono: fd.get("telefono"),
+        mensaje: fd.get("mensaje"),
+        tipo_solicitud: tipo
       };
 
       try {
-        // Enviar a Supabase
-        const { error } = await supabase
-          .from('leads')
-          .insert([leadData]);
-
-        if (error) throw error;
-
-        // Éxito
-        form.reset();
-        if (msg) { 
-          msg.textContent = "¡Listo! Te contactaremos pronto."; 
-          msg.classList.add("is-ok"); 
+        if (typeof window.__tsunamiInsertLead !== "function") {
+          throw new Error("lead-insert.js no cargó");
         }
+        await window.__tsunamiInsertLead(lead);
+        form.reset();
+        if (msg) { msg.textContent = "¡Listo! Te contactaremos pronto."; msg.classList.add("is-ok"); }
       } catch (error) {
         console.error("Error al guardar el lead:", error);
-        if (msg) { 
-          msg.textContent = "Hubo un error al enviar tu idea. Por favor, contáctanos por WhatsApp."; 
-          msg.classList.remove("is-ok"); 
-        }
+        if (msg) { msg.textContent = "Hubo un error al enviar. Por favor, contáctanos por WhatsApp."; msg.classList.remove("is-ok"); }
       } finally {
-        if (btn) { btn.disabled = false; btn.textContent = "Suéltala"; }
+        if (btn) { btn.disabled = false; btn.textContent = btnLabel || "Enviar"; }
       }
     });
   }

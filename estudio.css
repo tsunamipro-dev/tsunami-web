@@ -1,0 +1,281 @@
+/* =============================================================
+   TSUNAMI — estudio.css · "cara noir" (DEC-024)
+   Segundo camino de cliente: quien YA tiene música y quiere a Daniel
+   como productor / arreglista / músico de sesión.
+
+   Reutiliza styles.css (reset, tipografía, .container, .btn, reveals,
+   cursor, splash, grano). Aquí:
+     1. Tokens noir (remapea la capa semántica de la marca)
+     2. Overrides de componentes reutilizados (nav, btn, form, cursor…)
+     3. Componentes propios de la página
+   Se activa con <body class="theme-noir">.
+
+   Paleta: negro azulado + azul marino de marca (reusado) + oro
+   (evolución del mostaza #C29252) + plata/platino. Coherente con
+   la Hokusai original, en su cara oscura.
+   ============================================================= */
+
+/* =============================================================
+   1. TOKENS NOIR
+   ============================================================= */
+body.theme-noir {
+  /* Base oscura (negro con matiz azul, no gris plano) */
+  --noir:        #0B0F16;
+  --noir-2:      #121824;
+  --noir-3:      #1B2534;
+  /* Oro — misma familia cálida que el mostaza de la marca */
+  --gold:        #C9A24A;
+  --gold-2:      #E6CE8A;
+  /* Plata / platino */
+  --platinum:    #EEF1F5;
+  --silver:      #C4CBD6;
+  --silver-mute: #8A94A3;
+  --line-noir:   rgba(201, 162, 74, 0.20);
+
+  /* Semántica — remapeo del tema para que los componentes
+     reutilizados de styles.css hereden la cara noir */
+  --bg:        var(--noir);
+  --bg-alt:    var(--noir-2);
+  --text:      var(--silver);
+  --text-mute: var(--silver-mute);
+  --accent:    var(--gold);
+  --line:      var(--line-noir);
+
+  background: var(--noir);
+  color: var(--silver);
+}
+
+/* =============================================================
+   2. OVERRIDES DE COMPONENTES REUTILIZADOS
+   ============================================================= */
+.theme-noir ::selection { background: var(--gold); color: var(--noir); }
+.theme-noir :focus-visible { outline-color: var(--gold); }
+
+.theme-noir h1, .theme-noir h2, .theme-noir h3 { color: var(--platinum); }
+.theme-noir .accent-italic { color: var(--gold-2); }
+.theme-noir .lead { color: var(--silver); }
+.theme-noir .kicker, .theme-noir .section-kicker { color: var(--gold); }
+
+/* Splash (entrada por el logo) sobre negro */
+.theme-noir .splash { background: var(--noir); }
+
+/* Barra de progreso de scroll — degradado dorado */
+.theme-noir .scroll-progress { background: linear-gradient(90deg, var(--gold), var(--gold-2)); }
+
+/* Cursor de marca — aro dorado */
+.theme-noir .cursor-ring { border-color: var(--gold); }
+.theme-noir .cursor-ring.is-active { border-color: var(--gold-2); background: rgba(201, 162, 74, 0.08); }
+
+/* Botones */
+.theme-noir .btn-primary {
+  background: var(--gold); color: #0B0F16;
+  box-shadow: 0 10px 30px -12px rgba(201, 162, 74, 0.5);
+}
+.theme-noir .btn-primary:hover {
+  box-shadow: 0 18px 42px -14px rgba(201, 162, 74, 0.7);
+}
+.theme-noir .btn-ghost { border-color: rgba(196, 203, 214, 0.28); color: var(--silver); }
+.theme-noir .btn-ghost:hover { background: var(--platinum); color: var(--noir); }
+
+/* NAV noir */
+.theme-noir .nav.is-scrolled {
+  background: rgba(11, 15, 22, 0.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--line-noir);
+}
+.theme-noir .nav-word { color: var(--platinum); }
+.theme-noir .nav-links a { color: var(--silver); }
+.theme-noir .nav-links a:not(.nav-cta)::after { background: var(--gold); }
+.theme-noir .nav-cta { background: var(--gold); color: #0B0F16 !important; }
+.theme-noir .nav-cta:hover { background: var(--gold-2); }
+.theme-noir .nav-toggle span { background: var(--platinum); }
+@media (max-width: 719px) {
+  .theme-noir .nav-links {
+    background: var(--noir-2); box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Formulario noir (reusa .contact-form/.field de styles.css) */
+.theme-noir .contact-form {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line-noir);
+}
+.theme-noir .field label { color: var(--silver-mute); }
+.theme-noir .field input,
+.theme-noir .field textarea,
+.theme-noir .field select {
+  color: var(--platinum); background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(196, 203, 214, 0.18);
+}
+.theme-noir .field input:focus,
+.theme-noir .field textarea:focus,
+.theme-noir .field select:focus { border-color: var(--gold); background: rgba(255, 255, 255, 0.07); }
+.theme-noir .form-msg { color: var(--gold); }
+.theme-noir .form-msg.is-ok { color: var(--gold-2); }
+.theme-noir .wa-link { color: var(--gold); }
+.theme-noir .wa-link:hover { color: var(--platinum); }
+
+/* =============================================================
+   3. COMPONENTES PROPIOS DE ESTUDIO
+   ============================================================= */
+
+/* Ritmo de sección */
+.est-section { padding-block: var(--space-16); position: relative; }
+.est-section .container { position: relative; z-index: 1; }
+.est-head { max-width: 640px; margin-bottom: var(--space-8); }
+.est-head h2 { margin: .5rem 0; }
+.est-head .lead { color: var(--silver-mute); }
+@media (max-width: 719px) { .est-section { padding-block: var(--space-12); } }
+
+/* Filo dorado divisorio entre secciones */
+.est-section + .est-section::before {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(1140px, 90%); height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-noir), transparent);
+}
+
+/* ---------- HERO NOIR ---------- */
+.est-hero {
+  position: relative; overflow: hidden;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-block: 8rem 6rem;
+}
+.est-hero .bg-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0; pointer-events: none;
+  opacity: .5; filter: saturate(.7) brightness(.42) contrast(1.05);
+}
+/* Velo noir: oscurece el video y funde a negro hacia los bordes */
+.est-hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(58% 60% at 70% 30%, rgba(201, 162, 74, 0.10), transparent 70%),
+    linear-gradient(180deg, rgba(11, 15, 22, 0.82) 0%, rgba(11, 15, 22, 0.72) 45%, rgba(11, 15, 22, 0.94) 100%);
+}
+.est-hero-inner {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 900px; margin-inline: auto; padding-inline: var(--space-3);
+  text-align: center;
+}
+.est-hero h1 { font-size: var(--fs-display); margin: 1.3rem 0; }
+.est-hero h1 .accent-italic { display: block; }
+.est-hero-sub { max-width: 52ch; margin-inline: auto; color: var(--silver); }
+.est-hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.2rem; }
+.est-back {
+  display: inline-flex; align-items: center; gap: .4rem; margin-top: 2.4rem;
+  font-family: var(--font-body); font-style: italic; font-size: .95rem;
+  color: var(--silver-mute); border-bottom: 1px solid transparent;
+  transition: color .3s var(--ease-out), border-color .3s var(--ease-out);
+}
+.est-back:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ---------- SERVICIOS ---------- */
+.est-services-grid { display: grid; gap: 1rem; }
+@media (min-width: 640px) { .est-services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 960px) { .est-services-grid { grid-template-columns: repeat(3, 1fr); } }
+.svc {
+  position: relative; overflow: hidden;
+  padding: 1.6rem 1.5rem; border-radius: var(--radius);
+  background: var(--noir-2); border: 1px solid var(--line-noir);
+  transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out), border-color .4s var(--ease-out);
+}
+.svc:hover {
+  transform: translateY(-5px); border-color: rgba(201, 162, 74, 0.4);
+  box-shadow: 0 26px 50px -30px rgba(0, 0, 0, 0.8);
+}
+.svc::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-2));
+  transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform .45s var(--ease-out);
+}
+.svc:hover::before { transform: scaleX(1); }
+.svc-n { font-family: var(--font-impact); font-size: .95rem; color: var(--gold); letter-spacing: .04em; }
+.svc h3 { font-family: var(--font-display); font-size: 1.3rem; color: var(--platinum); margin: .5rem 0 .5rem; }
+.svc p { font-size: .98rem; color: var(--silver-mute); line-height: 1.5; }
+
+/* ---------- EL PRODUCTOR (autoridad, video Leo) ---------- */
+.est-producer {
+  position: relative; overflow: hidden; border-radius: var(--radius);
+  min-height: clamp(360px, 56vw, 560px);
+  display: grid; align-items: end; background: var(--noir-2);
+}
+.est-producer .producer-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; filter: brightness(.9) saturate(1.02);
+}
+.est-producer::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(11, 15, 22, 0.15) 0%, rgba(11, 15, 22, 0.5) 55%, rgba(11, 15, 22, 0.92) 100%);
+}
+.producer-copy { position: relative; z-index: 1; padding: clamp(1.6rem, 4vw, 2.8rem); max-width: 64ch; }
+.producer-kicker {
+  font-family: var(--font-body); font-style: italic; font-size: .92rem;
+  letter-spacing: .04em; color: var(--gold); margin-bottom: .5rem;
+}
+.producer-copy h2 { color: var(--platinum); margin-bottom: .7rem; }
+.producer-copy p { color: var(--silver); max-width: 58ch; }
+.producer-stats {
+  display: flex; flex-wrap: wrap; gap: 1.8rem; margin-top: 1.6rem;
+}
+.producer-stats div { display: grid; gap: .1rem; }
+.producer-stats b { font-family: var(--font-display); font-size: 1.9rem; color: var(--gold-2); line-height: 1; }
+.producer-stats span { font-size: .82rem; text-transform: uppercase; letter-spacing: .1em; color: var(--silver-mute); }
+@media (max-width: 719px) {
+  .est-producer::after {
+    background: linear-gradient(180deg, rgba(11, 15, 22, 0.35) 0%, rgba(11, 15, 22, 0.62) 55%, rgba(11, 15, 22, 0.94) 100%);
+  }
+}
+
+/* ---------- RESULTADOS (Spotify) ---------- */
+.est-results-grid { display: grid; gap: 1.6rem; }
+@media (min-width: 720px) { .est-results-grid { grid-template-columns: repeat(2, 1fr); } }
+.est-track {
+  padding: 1.4rem; border-radius: var(--radius);
+  background: var(--noir-2); border: 1px solid var(--line-noir);
+  display: grid; gap: 1rem; align-content: start;
+}
+.est-track h3 { font-size: 1.25rem; color: var(--platinum); }
+.est-track .track-role {
+  font-family: var(--font-body); font-size: var(--fs-label); text-transform: uppercase;
+  letter-spacing: .12em; color: var(--gold); margin-bottom: .2rem;
+}
+.est-track iframe { width: 100%; border: 0; border-radius: 12px; display: block; }
+.est-results-note {
+  margin-top: var(--space-6); font-family: var(--font-body); font-style: italic;
+  color: var(--silver-mute); font-size: .95rem;
+}
+
+/* ---------- CÓMO TRABAJAMOS (flujo lean) ---------- */
+.est-flow { display: grid; gap: 1px; background: var(--line-noir); border: 1px solid var(--line-noir); border-radius: var(--radius); overflow: hidden; }
+@media (min-width: 720px) { .est-flow { grid-template-columns: repeat(4, 1fr); } }
+.flow-step { background: var(--noir-2); padding: 1.8rem 1.5rem; position: relative; transition: background .4s var(--ease-out); }
+.flow-step:hover { background: var(--noir-3); }
+.flow-n { font-family: var(--font-impact); font-size: 1rem; color: var(--gold); letter-spacing: .04em; }
+.flow-step h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--platinum); margin: .5rem 0 .4rem; }
+.flow-step p { color: var(--silver-mute); font-size: .95rem; line-height: 1.5; }
+
+/* ---------- CONTACTO ---------- */
+.est-contact { position: relative; }
+.est-contact::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(50% 55% at 30% 20%, rgba(201, 162, 74, 0.08), transparent 70%);
+}
+.est-contact-grid { display: grid; gap: var(--space-8); position: relative; z-index: 1; }
+@media (min-width: 720px) { .est-contact-grid { grid-template-columns: 0.9fr 1.1fr; align-items: start; } }
+/* Texto de "Cotiza tu proyecto" con más aire entre elementos */
+.est-contact-head .impact { margin: .6rem 0 1.3rem; }
+.est-contact-head .lead { color: var(--silver); line-height: 1.55; margin-bottom: 1.4rem; }
+.est-contact-head .wa-link { margin-top: 1rem; }
+
+/* ---------- FOOTER NOIR ---------- */
+.est-footer { padding-block: var(--space-8); background: var(--noir); color: var(--silver); position: relative; }
+.est-footer .footer-inner { display: grid; gap: 1rem; justify-items: center; text-align: center; }
+.est-footer .footer-logo { width: 170px; opacity: .95; }
+.est-footer .footer-tag { font-family: var(--font-display); font-style: italic; color: var(--silver-mute); }
+.est-footer .footer-legal { font-size: var(--fs-caption); color: var(--silver-mute); }
+.est-footer .footer-alt {
+  font-size: .95rem; color: var(--silver-mute);
+}
+.est-footer .footer-alt a { color: var(--gold); border-bottom: 1px solid rgba(201, 162, 74, 0.4); }
+.est-footer .footer-alt a:hover { color: var(--platinum); }

@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Archivo+Black&display=swap" />
 
   <!-- Styles (bump ?v= en cada deploy que cambie CSS) -->
-  <link rel="stylesheet" href="styles.css?v=20260707f" />
+  <link rel="stylesheet" href="styles.css?v=20260716a" />
 </head>
 <body>
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -31,14 +31,14 @@
 
   <!-- ============================ SPLASH ============================ -->
   <div class="splash" data-splash aria-hidden="true">
-    <img class="splash-mark" src="assets/img/tsunami-isotipo.svg" alt="" width="92" height="92" />
+    <img class="splash-mark" src="assets/img/tsunami-isotipo.svg?v=2" alt="" width="92" height="92" />
   </div>
 
   <!-- ============================ NAV ============================ -->
   <header class="nav" data-nav>
     <div class="nav-inner">
       <a class="nav-brand" href="#inicio" aria-label="Tsunami — inicio">
-        <img class="nav-iso" src="assets/img/tsunami-isotipo.svg" alt="" width="36" height="36" />
+        <img class="nav-iso" src="assets/img/tsunami-isotipo.svg?v=2" alt="" width="36" height="36" />
         <span class="nav-word">TSUNAMI</span>
       </a>
       <nav class="nav-links" aria-label="Navegación principal">
@@ -70,12 +70,28 @@
           <span class="accent-italic">en una obra maestra.</span>
         </h1>
         <p class="hero-sub lead reveal">
-          Una melodía en la regadera, un voicenote a las 3am, una idea para una canción que no te deja en paz.
-          Musicalización para cualquier proyecto. Tú tienes la idea; nosotros la llevamos al siguiente nivel.
+          Desarrollamos proyectos musicales de principio a fin. Ya traigas una idea suelta —un voicenote a las 3am—
+          o una banda con canciones listas para producir, encontramos el camino para llevarla a su máxima expresión.
         </p>
-        <div class="hero-actions reveal">
-          <a class="btn btn-primary" href="#contacto">Atrévete a empezar</a>
-          <a class="btn btn-ghost" href="#proceso">Cómo funciona</a>
+        <div class="hero-doors reveal" role="group" aria-label="Elige tu camino">
+          <p class="hero-doors-lead">¿Con qué llegas hoy?</p>
+          <div class="doors">
+            <a class="door" href="estudio.html">
+              <span class="door-k">Ya tengo mi música</span>
+              <span class="door-d">Banda, canciones o demos que quieres llevar a nivel profesional: producción, arreglos, músicos de sesión.</span>
+              <span class="door-go" aria-hidden="true">Entrar al estudio →</span>
+            </a>
+            <a class="door door-idea" href="#proceso">
+              <span class="door-k">Solo tengo una idea</span>
+              <span class="door-d">Un voicenote, una melodía que no te deja en paz. La convertimos en una obra terminada.</span>
+              <span class="door-go" aria-hidden="true">Ver el proceso →</span>
+            </a>
+            <a class="door" href="#nosotros">
+              <span class="door-k">Quiénes somos</span>
+              <span class="door-d">Daniel, su cartera de músicos de Monterrey y las obras que ha producido.</span>
+              <span class="door-go" aria-hidden="true">Conócenos →</span>
+            </a>
+          </div>
         </div>
         <p class="hero-acts reveal">
           <span>Marea alta</span><i>·</i><span>Tsunami de ideas</span><i>·</i><span>Calma</span>
@@ -108,6 +124,13 @@
             hace lo que le pides, pero no siente el amor ni la tristeza como tú
             los sientes, no tiene identidad y no puede ponerlo en tu música.
             Nosotros sí. Ese es nuestro diferenciador.
+          </p>
+          <p class="reveal">
+            Al frente está Daniel RoHe: multi-instrumentista, arreglista, compositor y
+            director musical con más de 15 años en la escena. Ha producido y grabado obras
+            de artistas reales —de un voicenote a una producción trascendental— y dirige una
+            cartera de músicos de sesión top de Monterrey.
+            <a class="about-link" href="#resultados">Escucha lo que ha producido ↓</a>
           </p>
           <ul class="about-points reveal">
             <li><strong>No buscas músicos.</strong> Tenemos una red de sesión top en Monterrey.</li>
@@ -423,10 +446,9 @@
   <script defer src="lib/ScrollTrigger.min.js"></script>
   <script defer src="lib/waves-gl.js?v=20260701"></script>
   <script defer src="lib/manifest.js?v=20260707a"></script>
-  <script defer src="main.js?v=20260707a"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="lib/gsap.min.js"></script>
-  <!-- ... el resto de tus scripts ... -->
+  <script defer src="lib/lead-insert.js?v=20260716a"></script>
+  <script defer src="main.js?v=20260716a"></script>
 </body>
 </html>
 

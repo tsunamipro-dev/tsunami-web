@@ -307,6 +307,47 @@ html.tint-on main section { background: transparent !important; }
   text-transform: uppercase; letter-spacing: .16em; color: var(--ink-mute); display: flex; gap: .8rem; justify-content: center; align-items: center; }
 .hero-acts i { color: var(--terracotta); font-style: normal; }
 
+/* HERO DOORS — bifurcador de caminos (router de 3 puertas, 2026-07-15).
+   Sustituye a los 2 CTAs: el visitante elige quién es (ya tiene música /
+   solo una idea / conocernos). La puerta "idea" es el camino insignia. */
+.hero-doors { margin-top: 2.4rem; }
+.hero-doors-lead {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 1.05rem; color: var(--ink-mute); margin-bottom: 1.1rem;
+}
+.doors { display: grid; gap: 1rem; text-align: left; }
+.door {
+  display: grid; gap: .5rem; align-content: start;
+  padding: 1.3rem 1.4rem; border-radius: var(--radius);
+  background: rgba(255,255,255,.55); border: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out),
+              border-color .4s var(--ease-out), background .4s var(--ease-out);
+}
+.door:hover {
+  transform: translateY(-5px); border-color: var(--terracotta);
+  box-shadow: 0 24px 46px -26px rgba(0,49,83,.4); background: rgba(255,255,255,.82);
+}
+.door-k { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--prussia); }
+.door-d { font-size: .95rem; line-height: 1.45; color: var(--ink-mute); }
+.door-go {
+  font-family: var(--font-body); font-style: italic; font-size: .9rem;
+  color: var(--terracotta); margin-top: .2rem;
+  transition: transform .35s var(--ease-out);
+}
+.door:hover .door-go { transform: translateX(4px); }
+/* Puerta insignia (idea → obra): acento cálido sutil que la distingue */
+.door-idea { border-color: rgba(203,75,49,.4); background: rgba(203,75,49,.05); }
+.door-idea:hover { background: rgba(203,75,49,.1); }
+
+/* Enlace inline en "Quiénes somos" hacia los resultados */
+.about-link {
+  display: inline-block; margin-top: .3rem; color: var(--terracotta);
+  font-style: italic; border-bottom: 1px solid rgba(203,75,49,.4);
+  transition: color .3s var(--ease-out), border-color .3s var(--ease-out);
+}
+.about-link:hover { color: var(--prussia); border-color: var(--prussia); }
+
 /* (Olas azules del hero retiradas 2026-07-01 — chocaban con el fondo crema.
    El hero queda limpio: video difuminado + scrim.) */
 
@@ -871,6 +912,7 @@ html.tint-on .filmstrip { background: transparent; }
    ============================================================= */
 @media (min-width: 720px) {
   .about-grid { grid-template-columns: 0.85fr 1.15fr; align-items: start; }
+  .doors { grid-template-columns: repeat(3, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); }
   .case-feature { grid-template-columns: 1.05fr 1fr; align-items: center; column-gap: 2rem; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
