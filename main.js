@@ -260,7 +260,7 @@
       var paint = function (self) { body.style.backgroundColor = mix(self.progress); };
       trigs.push({
         st: ScrollTrigger.create({
-          trigger: el, start: "top 90%", end: "top 45%",
+          trigger: el, start: "top 100%", end: "top 45%",
           scrub: true, onUpdate: paint
         }),
         paint: paint
