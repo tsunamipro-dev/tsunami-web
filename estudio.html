@@ -23,8 +23,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Archivo+Black&display=swap" />
 
   <!-- Styles: base compartida + cara noir (bump ?v= en cada deploy que cambie CSS) -->
-  <link rel="stylesheet" href="styles.css?v=20260716a" />
-  <link rel="stylesheet" href="estudio.css?v=20260716b" />
+  <link rel="stylesheet" href="styles.css?v=20260716c" />
+  <link rel="stylesheet" href="estudio.css?v=20260716c" />
 </head>
 <body class="theme-noir">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -152,6 +152,27 @@
             </div>
           </figcaption>
         </figure>
+
+        <!-- Tocando: la prueba del "multi-instrumentista" que afirma el copy de arriba.
+             Mismo patrón de facade que la landing (DEC-012): el embed de IG solo carga
+             al clic, para no pagar su peso de entrada. -->
+        <div class="producer-playing reveal">
+          <p class="playing-lead">Y antes de dirigir, toca.</p>
+          <div class="case-gallery">
+            <button class="embed-facade" type="button" data-ig="BebPbrsFOha" aria-label="Ver: Daniel tocando trompeta y piano a la vez, en vivo con Voznoff">
+              <span class="facade-play">▶</span>
+              <span class="facade-label">Trompeta y piano, a la vez</span>
+            </button>
+            <button class="embed-facade" type="button" data-ig="C5gwN7Mp6LT" aria-label="Ver: metales con banda en vivo">
+              <span class="facade-play">▶</span>
+              <span class="facade-label">Metales, con banda</span>
+            </button>
+            <button class="embed-facade" type="button" data-ig="C2yQDhcuf8S" aria-label="Ver: teclados y guitarra, arreglo propio">
+              <span class="facade-play">▶</span>
+              <span class="facade-label">Teclados y guitarra</span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -277,6 +298,6 @@
   <script defer src="lib/manifest.js?v=20260707a"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="lib/lead-insert.js?v=20260716a"></script>
-  <script defer src="main.js?v=20260716a"></script>
+  <script defer src="main.js?v=20260716c"></script>
 </body>
 </html>

@@ -279,3 +279,36 @@ body.theme-noir {
 }
 .est-footer .footer-alt a { color: var(--gold); border-bottom: 1px solid rgba(201, 162, 74, 0.4); }
 .est-footer .footer-alt a:hover { color: var(--platinum); }
+
+/* ---------- TOCANDO — vitrina de IG en el bloque del productor ----------
+   Reusa .case-gallery / .embed-facade de styles.css (mismo patron DEC-012:
+   el embed solo carga al clic). Aqui solo se remapea la cara noir: el facade
+   base viene con prusia/ola y hover terracota, que sobre negro rompen la
+   coherencia. Se traducen a la paleta noir (negro + oro).                */
+.producer-playing { margin-top: var(--space-8); }
+.playing-lead {
+  font-family: var(--font-display); font-style: italic;
+  font-size: var(--fs-lead); color: var(--silver);
+  margin-bottom: 1.4rem; text-align: center;
+}
+
+.theme-noir .embed-facade {
+  background: linear-gradient(160deg, var(--noir-3), var(--noir-2));
+  border: 1px solid var(--line-noir);
+  color: var(--silver);
+}
+.theme-noir .embed-facade:hover {
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, .85);
+  border-color: rgba(201, 162, 74, 0.45);
+}
+.theme-noir .embed-facade:focus-visible { outline-color: var(--gold); }
+.theme-noir .facade-play {
+  background: rgba(201, 162, 74, 0.12);
+  border-color: rgba(201, 162, 74, 0.5);
+  color: var(--gold-2);
+}
+/* El hover del facade en la cara Calma pinta terracota; aqui, oro. */
+.theme-noir .embed-facade:hover .facade-play {
+  background: var(--gold); border-color: var(--gold); color: var(--noir);
+}
+.theme-noir .facade-label { color: var(--silver); }
