@@ -286,11 +286,6 @@ body.theme-noir {
    base viene con prusia/ola y hover terracota, que sobre negro rompen la
    coherencia. Se traducen a la paleta noir (negro + oro).                */
 .producer-playing { margin-top: var(--space-8); }
-.playing-lead {
-  font-family: var(--font-display); font-style: italic;
-  font-size: var(--fs-lead); color: var(--silver);
-  margin-bottom: 1.4rem; text-align: center;
-}
 
 .theme-noir .embed-facade {
   background: linear-gradient(160deg, var(--noir-3), var(--noir-2));
