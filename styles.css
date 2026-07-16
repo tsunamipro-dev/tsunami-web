@@ -24,13 +24,19 @@
   --cream-2:     #EDE7D6;
   --ink:         #0e2233;   /* texto sobre crema */
   --ink-mute:    #5b6b78;
+  /* Terracota profundo — mismo tono (H 10°) y saturación (61%), 3% menos de
+     luminosidad. El terracota de marca (#CB4B31) da 4.09:1 sobre crema: pasa
+     como texto grande, NO como texto normal. Este da 4.54:1 → AA.
+     Uso: texto chico sobre crema, y relleno bajo texto crema (botón, badge).
+     El de marca se conserva para rellenos grandes, bordes y acentos display. */
+  --terracotta-deep: #BF462E;
 
   /* Semántica — tema CALMA (default, Actos I/III) */
   --bg:          var(--cream);
   --bg-alt:      #efe9da;
   --text:        var(--ink);
   --text-mute:   var(--ink-mute);
-  --accent:      var(--terracotta);
+  --accent:      var(--terracotta-deep);
   --line:        rgba(0, 49, 83, 0.14);
 
   /* Fuentes */
@@ -55,11 +61,24 @@
   --space-2: 16px; --space-3: 24px; --space-4: 32px;
   --space-6: 48px; --space-8: 64px; --space-12: 96px; --space-16: 128px;
   --maxw: 1140px;
-  --radius: 14px;
+
+  /* Radios — --radius es el canon de superficie (cards, formularios) */
+  --radius-xs:     4px;    /* outline de foco */
+  --radius-sm:     8px;    /* skip-link, chips */
+  --radius-md:     12px;   /* media, embeds, iframes */
+  --radius:        14px;   /* cards, formularios, superficies */
+  --radius-pill:   999px;  /* botones, badges, tags */
+  --radius-circle: 50%;    /* avatares, botón play */
 
   /* Easings */
   --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Duraciones */
+  --dur-fast:   .3s;   /* color, borde, micro-feedback */
+  --dur-base:   .35s;  /* botones, links, nav */
+  --dur-slow:   .4s;   /* cards, lift, nav sticky */
+  --dur-reveal: .8s;   /* reveals de scroll */
 }
 
 /* =============================================================
@@ -183,7 +202,7 @@ img { height: auto; }
 button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
 a { color: inherit; text-decoration: none; }
 p { text-wrap: pretty; }
-::selection { background: var(--terracotta); color: var(--cream); }
+::selection { background: var(--terracotta-deep); color: var(--cream); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
 /* =============================================================
@@ -231,7 +250,7 @@ h3 { font-size: var(--fs-h3); font-weight: 600; font-family: var(--font-body); }
   letter-spacing: 0.01em; transition: transform .35s var(--ease-out), background .35s var(--ease-out), color .35s var(--ease-out), box-shadow .35s var(--ease-out);
   will-change: transform;
 }
-.btn-primary { background: var(--terracotta); color: var(--cream); box-shadow: 0 10px 30px -12px rgba(203,75,49,.7); }
+.btn-primary { background: var(--terracotta-deep); color: var(--cream); box-shadow: 0 10px 30px -12px rgba(203,75,49,.7); }
 .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -14px rgba(203,75,49,.85); }
 .btn-ghost { border: 1px solid var(--line); color: var(--text); }
 .btn-ghost:hover { background: var(--text); color: var(--bg); transform: translateY(-3px); }
@@ -259,7 +278,7 @@ h3 { font-size: var(--fs-h3); font-weight: 600; font-family: var(--font-body); }
 }
 .nav-links a:not(.nav-cta):hover::after { width: 100%; }
 .nav-cta { background: var(--prussia); color: var(--cream) !important; padding: .55rem 1.1rem; border-radius: 999px; }
-.nav-cta:hover { background: var(--terracotta); }
+.nav-cta:hover { background: var(--terracotta-deep); }
 .nav-toggle { display: none; flex-direction: column; gap: 5px; padding: .4rem; }
 .nav-toggle span { width: 26px; height: 2px; background: var(--prussia); transition: transform .3s var(--ease-out), opacity .3s, background .35s var(--ease-out); }
 
@@ -274,7 +293,7 @@ h3 { font-size: var(--fs-h3); font-weight: 600; font-family: var(--font-body); }
 @media (min-width: 720px) {
   .nav.over-dark .nav-links a { color: var(--cream); }
   .nav.over-dark .nav-links a:not(.nav-cta)::after { background: var(--mustard); }
-  .nav.over-dark .nav-cta { background: var(--terracotta); }
+  .nav.over-dark .nav-cta { background: var(--terracotta-deep); }
   .nav.over-dark .nav-cta:hover { background: var(--mustard); }
 }
 
@@ -296,7 +315,7 @@ html.tint-on main section { background: transparent !important; }
 .hero {
   min-height: 100vh; min-height: 100svh;
   display: flex; flex-direction: column; justify-content: center;
-  padding-block: 8rem 14rem; position: relative; overflow: hidden;
+  padding-block: 8rem; position: relative; overflow: hidden;
 }
 .hero-inner { width: 100%; max-width: 920px; margin-inline: auto; padding-inline: var(--space-3); text-align: center; position: relative; z-index: 2; }
 .hero-title { font-size: var(--fs-display); margin: 1.4rem 0; }
@@ -305,7 +324,7 @@ html.tint-on main section { background: transparent !important; }
 .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.2rem; }
 .hero-acts { margin-top: 2.6rem; font-family: var(--font-body); font-size: var(--fs-caption);
   text-transform: uppercase; letter-spacing: .16em; color: var(--ink-mute); display: flex; gap: .8rem; justify-content: center; align-items: center; }
-.hero-acts i { color: var(--terracotta); font-style: normal; }
+.hero-acts i { color: var(--terracotta-deep); font-style: normal; }
 
 /* HERO DOORS — bifurcador de caminos (router de 3 puertas, 2026-07-15).
    Sustituye a los 2 CTAs: el visitante elige quién es (ya tiene música /
@@ -332,7 +351,7 @@ html.tint-on main section { background: transparent !important; }
 .door-d { font-size: .95rem; line-height: 1.45; color: var(--ink-mute); }
 .door-go {
   font-family: var(--font-body); font-style: italic; font-size: .9rem;
-  color: var(--terracotta); margin-top: .2rem;
+  color: var(--terracotta-deep); margin-top: .2rem;
   transition: transform .35s var(--ease-out);
 }
 .door:hover .door-go { transform: translateX(4px); }
@@ -342,7 +361,7 @@ html.tint-on main section { background: transparent !important; }
 
 /* Enlace inline en "Quiénes somos" hacia los resultados */
 .about-link {
-  display: inline-block; margin-top: .3rem; color: var(--terracotta);
+  display: inline-block; margin-top: .3rem; color: var(--terracotta-deep);
   font-style: italic; border-bottom: 1px solid rgba(203,75,49,.4);
   transition: color .3s var(--ease-out), border-color .3s var(--ease-out);
 }
@@ -385,7 +404,7 @@ html.tint-on main section { background: transparent !important; }
 /* RESULTS */
 .results-head { max-width: 620px; margin-bottom: var(--space-8); }
 .results-head h2 { margin: .5rem 0; }
-.result-badge { position: absolute; top: .8rem; left: .8rem; font-family: var(--font-body); font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; background: var(--terracotta); color: var(--cream); padding: .3rem .7rem; border-radius: 999px; }
+.result-badge { position: absolute; top: .8rem; left: .8rem; font-family: var(--font-body); font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; background: var(--terracotta-deep); color: var(--cream); padding: .3rem .7rem; border-radius: 999px; }
 
 /* RESULTS — casos reales con embed */
 .results-cases { display: grid; gap: 1.6rem; }
@@ -443,7 +462,7 @@ html.tint-on main section { background: transparent !important; }
 .team-card { display: flex; gap: 1.4rem; align-items: center; }
 .team-photo { flex: 0 0 auto; width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(140deg, var(--prussia), var(--wave)); display: grid; place-items: center; }
 .team-initial { font-family: var(--font-impact); font-size: 2.4rem; color: var(--cream); }
-.team-role { font-family: var(--font-body); font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .12em; color: var(--terracotta); margin: .25rem 0 .6rem; }
+.team-role { font-family: var(--font-body); font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .12em; color: var(--terracotta-deep); margin: .25rem 0 .6rem; }
 .team-info p:last-child { color: var(--ink-mute); }
 
 /* CONTACT */
